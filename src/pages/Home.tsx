@@ -8,6 +8,13 @@ import { db } from '../firebase';
 import { doc, getDoc } from 'firebase/firestore';
 import { AnimatePresence } from 'motion/react';
 
+import firefightingImg from '../assets/images/firefighting_systems_thumbnail_1779179053671.png';
+import hvacImg from '../assets/images/hvac_cooling_thumbnail_1779179069525.png';
+import generatorsImg from '../assets/images/generators_power_thumbnail_1779179086020.png';
+import alarmsImg from '../assets/images/smart_alarms_thumbnail_1779179101533.png';
+import cctvImg from '../assets/images/cctv_security_thumbnail_1779181586579.png';
+import heroImg from '../assets/images/gcc_hero_engineering_1779179031521.png';
+
 const ServiceCard = ({ id, icon: Icon, title, description, image, colorClass }: any) => {
   const { t } = useTranslation();
   const { isAdmin } = useAuth();
@@ -94,7 +101,7 @@ export default function Home() {
       icon: Shield,
       title: t('firefighting'),
       description: t('firefighting_desc'),
-      image: "/src/assets/images/firefighting_systems_thumbnail_1779179053671.png",
+      image: firefightingImg,
       colorClass: "bg-red-600"
     },
     {
@@ -102,7 +109,7 @@ export default function Home() {
       icon: Wind,
       title: t('hvac'),
       description: t('hvac_desc'),
-      image: "/src/assets/images/hvac_cooling_thumbnail_1779179069525.png",
+      image: hvacImg,
       colorClass: "bg-blue-600"
     },
     {
@@ -110,7 +117,7 @@ export default function Home() {
       icon: Zap,
       title: t('generators'),
       description: t('generators_desc'),
-      image: "/src/assets/images/generators_power_thumbnail_1779179086020.png",
+      image: generatorsImg,
       colorClass: "bg-yellow-600"
     },
     {
@@ -118,7 +125,7 @@ export default function Home() {
       icon: Bell,
       title: t('alarms'),
       description: t('alarms_desc'),
-      image: "/src/assets/images/smart_alarms_thumbnail_1779179101533.png",
+      image: alarmsImg,
       colorClass: "bg-indigo-600"
     },
     {
@@ -126,7 +133,7 @@ export default function Home() {
       icon: Video,
       title: t('cctv'),
       description: t('cctv_desc'),
-      image: "/src/assets/images/cctv_security_thumbnail_1779181586579.png",
+      image: cctvImg,
       colorClass: "bg-emerald-600"
     }
   ];
@@ -137,7 +144,7 @@ export default function Home() {
       <section className="relative h-screen flex items-center pt-20 overflow-hidden bg-slate-900 lg:bg-transparent">
         <div className="absolute inset-0 z-0">
           <img 
-            src="/src/assets/images/gcc_hero_engineering_1779179031521.png" 
+            src={heroImg} 
             alt="Engineering Hero" 
             className="w-full h-full object-cover opacity-60 lg:opacity-100"
           />

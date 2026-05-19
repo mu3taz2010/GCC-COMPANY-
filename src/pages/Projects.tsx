@@ -7,6 +7,10 @@ import { useAuth } from '../context/AuthContext';
 import { Calendar, User, Layout, Eye, X, Edit2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
+import firefightingImg from '../assets/images/firefighting_systems_thumbnail_1779179053671.png';
+import hvacImg from '../assets/images/hvac_cooling_thumbnail_1779179069525.png';
+import generatorsImg from '../assets/images/generators_power_thumbnail_1779179086020.png';
+
 interface Project {
   id: string;
   title: string;
@@ -118,9 +122,9 @@ export default function Projects() {
   }, []);
 
   const defaultProjects = [
-    { id: '1', title: "Aramco Facility Pump Expansion", category: "Firefighting Systems", image: "/src/assets/images/firefighting_systems_thumbnail_1779179053671.png", description: "Design and deployment of critical infrastructure.", duration: "12 Months", client: "Saudi Aramco" },
-    { id: '2', title: "Riyadh Metro HVAC Phase 2", category: "HVAC & Cooling", image: "/src/assets/images/hvac_cooling_thumbnail_1779179069525.png", description: "Tunnel ventilation and station cooling systems installation.", duration: "18 Months", client: "ADA" },
-    { id: '3', title: "NEOM Grid Power Backup", category: "Power Generators", image: "/src/assets/images/generators_power_thumbnail_1779179086020.png", description: "Installation of 50MW backup diesel generators array.", duration: "8 Months", client: "NEOM" }
+    { id: '1', title: "Aramco Facility Pump Expansion", category: "Firefighting Systems", image: firefightingImg, description: "Design and deployment of critical infrastructure.", duration: "12 Months", client: "Saudi Aramco" },
+    { id: '2', title: "Riyadh Metro HVAC Phase 2", category: "HVAC & Cooling", image: hvacImg, description: "Tunnel ventilation and station cooling systems installation.", duration: "18 Months", client: "ADA" },
+    { id: '3', title: "NEOM Grid Power Backup", category: "Power Generators", image: generatorsImg, description: "Installation of 50MW backup diesel generators array.", duration: "8 Months", client: "NEOM" }
   ];
 
   const displayProjects = projects.length > 0 ? projects : defaultProjects;

@@ -5,6 +5,8 @@ import { motion, AnimatePresence } from 'motion/react';
 import { Link, useLocation } from 'react-router-dom';
 import { cn } from '../lib/utils';
 
+import logo from '../assets/images/gcc_corporate_logo_1779179556841.png';
+
 export const Navbar = () => {
   const { t, i18n } = useTranslation();
   const [isOpen, setIsOpen] = React.useState(false);
@@ -30,7 +32,7 @@ export const Navbar = () => {
           <div className="flex-shrink-0">
             <Link to="/" className="flex items-center space-x-3 rtl:space-x-reverse group">
               <img 
-                src="/src/assets/images/gcc_corporate_logo_1779179556841.png" 
+                src={logo} 
                 alt="GCC Logo" 
                 className="w-14 h-14 object-contain transition-transform group-hover:scale-105"
               />
@@ -138,7 +140,7 @@ export const Footer = () => {
           <div className="col-span-1 md:col-span-2">
              <div className="flex items-center space-x-4 rtl:space-x-reverse mb-8">
               <img 
-                src="/src/assets/images/gcc_corporate_logo_1779179556841.png" 
+                src={logo} 
                 alt="GCC Logo" 
                 className="w-14 h-14 object-contain brightness-0 invert opacity-90"
               />
