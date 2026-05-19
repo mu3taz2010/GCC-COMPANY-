@@ -1,0 +1,6 @@
+{
+  "name": "GCC Company - Engineering Solutions",
+  "description": "Professional engineering firm specializing in firefighting, HVAC, power generators, and smart alarm systems.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

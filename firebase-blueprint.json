@@ -1,0 +1,87 @@
+{
+  "entities": {
+    "Project": {
+      "title": "Project",
+      "description": "A past industrial project completed by GCC Company",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string", "description": "Name of the project" },
+        "category": { "type": "string", "enum": ["Firefighting Systems", "HVAC & Cooling", "Power Generators", "Alarm & Control Systems", "CCTV & Security Cameras"] },
+        "image": { "type": "string", "format": "uri" },
+        "description": { "type": "string" },
+        "duration": { "type": "string", "description": "Implementation duration" },
+        "client": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["title", "category", "image", "description", "createdAt", "updatedAt"]
+    },
+    "Admin": {
+      "title": "Admin",
+      "description": "A user with administrative privileges to manage projects",
+      "type": "object",
+      "properties": {
+        "email": { "type": "string", "format": "email" },
+        "role": { "type": "string", "enum": ["admin"] }
+      },
+      "required": ["email", "role"]
+    },
+    "Quotation": {
+      "title": "Quotation",
+      "description": "A request for quotation from a client",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "systemType": { "type": "string" },
+        "details": { "type": "object" },
+        "customer": {
+          "type": "object",
+          "properties": {
+            "name": { "type": "string" },
+            "phone": { "type": "string" },
+            "email": { "type": "string" },
+            "city": { "type": "string" },
+            "notes": { "type": "string" }
+          }
+        },
+        "status": { "type": "string", "enum": ["New", "Under Review", "Priced", "Completed"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      }
+    },
+    "SiteSettings": {
+      "title": "SiteSettings",
+      "description": "Global application settings and modular content for About Us and Catalog",
+      "type": "object",
+      "properties": {
+        "aboutOverview": { "type": "string" },
+        "vision": { "type": "string" },
+        "mission": { "type": "string" },
+        "team": { "type": "array", "items": { "type": "object", "properties": { "name": { "type": "string" }, "role": { "type": "string" } } } },
+        "catalogUrl": { "type": "string", "format": "uri" },
+        "profileCover": { "type": "string" },
+        "profileDescription": { "type": "string" },
+        "profilePageCount": { "type": "string" },
+        "profileFileSize": { "type": "string" }
+      }
+    }
+  },
+  "firestore": {
+    "projects": {
+      "schema": "Project",
+      "description": "Collection of engineering projects"
+    },
+    "admins": {
+      "schema": "Admin",
+      "description": "Lookup for administrative users"
+    },
+    "quotations": {
+      "schema": "Quotation",
+      "description": "Requests for quotes from clients"
+    },
+    "settings": {
+      "schema": "SiteSettings",
+      "description": "Global site settings"
+    }
+  }
+}

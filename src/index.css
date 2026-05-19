@@ -1,0 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Outfit", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+@layer base {
+  body {
+    @apply font-sans text-slate-900 antialiased bg-white;
+  }
+  h1, h2, h3, h4 {
+    @apply font-display tracking-tight;
+  }
+}
+
+.shadow-soft {
+  box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.08);
+}
+
+.bg-blueprint {
+  background-size: 40px 40px;
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
+}
+
+.bg-blueprint-dark {
+  background-size: 40px 40px;
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+}
+
+@keyframes blueprint-scroll {
+  from { background-position: 0 0; }
+  to { background-position: 40px 40px; }
+}
+
+.animate-blueprint {
+  animation: blueprint-scroll 20s linear infinite;
+}
