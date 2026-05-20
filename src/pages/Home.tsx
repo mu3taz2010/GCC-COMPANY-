@@ -58,9 +58,14 @@ export default function Home() {
 
   React.useEffect(() => {
     const fetchProfile = async () => {
-      const snap = await getDoc(doc(db, 'settings', 'about'));
-      if (snap.exists()) {
-        setProfile(snap.data());
+      try {
+        const res = await fetch('/api/settings/about');
+        if (res.ok) {
+          const data = await res.json();
+          setProfile(data);
+        }
+      } catch (err) {
+        console.error("Failed to fetch settings from server:", err);
       }
     };
     fetchProfile();

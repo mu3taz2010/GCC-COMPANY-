@@ -37,14 +37,3 @@ export const googleProvider = new GoogleAuthProvider();
 export const loginWithGoogle = () => signInWithPopup(auth, googleProvider);
 export const logout = () => signOut(auth);
 
-// Validation test connection
-async function testConnection() {
-  try {
-    await getDocFromServer(doc(db, '_connection_test', 'startup'));
-  } catch (error) {
-    if (error instanceof Error && error.message.includes('offline')) {
-      console.warn("Firebase: Client appears to be offline or config is invalid.");
-    }
-  }
-}
-testConnection();

@@ -104,17 +104,20 @@ export default function Projects() {
   const [loading, setLoading] = React.useState(true);
 
   React.useEffect(() => {
-    const q = query(collection(db, 'projects'), orderBy('createdAt', 'desc'));
-    const unsub = onSnapshot(q, (snapshot) => {
-      const data = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as Project));
-      setProjects(data);
-      setLoading(false);
-    }, (err) => {
-      console.error("Firestore loading error:", err);
-      // Fallback or empty state
-      setLoading(false);
-    });
-    return () => unsub();
+    const fetchProjects = async () => {
+      try {
+        const res = await fetch('/api/projects');
+        if (res.ok) {
+          const data = await res.json();
+          setProjects(data);
+        }
+      } catch (err) {
+        console.error("Failed to fetch projects from server:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchProjects();
   }, []);
 
   const defaultProjects = [
