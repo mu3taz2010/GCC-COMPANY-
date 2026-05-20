@@ -1,15 +1,16 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Menu, X, Globe, Phone, Building2, Shield, Info, Briefcase, MessageSquare } from 'lucide-react';
+import { Menu, X, Globe, Phone, Building2, Shield, Info, Briefcase, MessageSquare, UserCheck, LogOut } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Link, useLocation } from 'react-router-dom';
 import { cn } from '../lib/utils';
-
-import logo from '../assets/images/gcc_corporate_logo_1779179556841.png';
+import { useAuth } from '../context/AuthContext';
+import { logout } from '../firebase';
 
 export const Navbar = () => {
   const { t, i18n } = useTranslation();
   const [isOpen, setIsOpen] = React.useState(false);
+  const { user, isAdmin } = useAuth();
   const location = useLocation();
 
   const toggleLang = () => {
@@ -32,7 +33,7 @@ export const Navbar = () => {
           <div className="flex-shrink-0">
             <Link to="/" className="flex items-center space-x-3 rtl:space-x-reverse group">
               <img 
-                src={logo} 
+                src="/images/gcc_corporate_logo_1779179556841.png" 
                 alt="GCC Logo" 
                 className="w-14 h-14 object-contain transition-transform group-hover:scale-105"
               />
@@ -60,6 +61,20 @@ export const Navbar = () => {
                 <span>{item.name}</span>
               </Link>
             ))}
+            {isAdmin && (
+              <Link
+                to="/admin"
+                className={cn(
+                  "relative group flex items-center space-x-2 rtl:space-x-reverse px-5 py-2.5 rounded-full text-xs font-black uppercase tracking-widest transition-all",
+                  location.pathname === '/admin' 
+                    ? "bg-red-600 text-white shadow-xl shadow-red-600/20" 
+                    : "text-red-600 border-2 border-red-600 hover:bg-red-50"
+                )}
+              >
+                <UserCheck size={14} />
+                <span>Admin Hub</span>
+              </Link>
+            )}
           </div>
 
           {/* Actions */}
@@ -114,6 +129,28 @@ export const Navbar = () => {
                   <span className="text-sm font-black uppercase tracking-widest">{item.name}</span>
                 </Link>
               ))}
+              {isAdmin && (
+                <>
+                  <Link
+                    to="/admin"
+                    onClick={() => setIsOpen(false)}
+                    className={cn(
+                      "flex items-center space-x-4 rtl:space-x-reverse px-4 py-4 rounded-xl transition-all",
+                      location.pathname === '/admin' ? "bg-red-600 text-white" : "text-red-600 border border-red-200"
+                    )}
+                  >
+                    <UserCheck size={20} />
+                    <span className="text-sm font-black uppercase tracking-widest">Admin Hub</span>
+                  </Link>
+                  <button
+                    onClick={() => { logout(); setIsOpen(false); }}
+                    className="flex items-center space-x-4 rtl:space-x-reverse px-4 py-4 rounded-xl text-slate-400 hover:bg-slate-50 w-full"
+                  >
+                    <LogOut size={20} />
+                    <span className="text-sm font-black uppercase tracking-widest">Logout</span>
+                  </button>
+                </>
+              )}
               <div className="pt-6">
                  <Link 
                   to="/request-quote"
@@ -140,7 +177,7 @@ export const Footer = () => {
           <div className="col-span-1 md:col-span-2">
              <div className="flex items-center space-x-4 rtl:space-x-reverse mb-8">
               <img 
-                src={logo} 
+                src="/images/gcc_corporate_logo_1779179556841.png" 
                 alt="GCC Logo" 
                 className="w-14 h-14 object-contain brightness-0 invert opacity-90"
               />

@@ -4,31 +4,29 @@ import { getFirestore, doc, getDocFromServer } from 'firebase/firestore';
 import { getStorage } from 'firebase/storage';
 import legacyConfig from '../firebase-applet-config.json';
 
-// Firebase configuration using environment variables to avoid exposing secrets in source code.
-// These are managed via the AI Studio Secrets/Settings panel.
-const envConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
-  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
-  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
-  appId: import.meta.env.VITE_FIREBASE_APP_ID,
-  firestoreDatabaseId: import.meta.env.VITE_FIREBASE_FIRESTORE_DB_ID,
+// Firebase configuration provided by the user
+const firebaseConfig = {
+  apiKey: "AIzaSyDmzheFmFkOHXbRi-NjJ6RlvJpQhZddAfI",
+  authDomain: "gcc-company.firebaseapp.com",
+  projectId: "gcc-company",
+  storageBucket: "gcc-company.firebasestorage.app",
+  messagingSenderId: "953815562645",
+  appId: "1:953815562645:web:5d7c9b409dc2105d9e5e9c",
+  measurementId: "G-DS5Q3KJ0F5",
+  firestoreDatabaseId: import.meta.env.VITE_FIREBASE_FIRESTORE_DB_ID || "(default)"
 };
 
-// Priority: Env Vars > Legacy Config File
-const isConfigValid = (config: any) => config && config.apiKey && config.apiKey !== 'PLACEHOLDER_API_KEY';
-
-let finalConfig = envConfig;
-if (!isConfigValid(envConfig)) {
-  if (isConfigValid(legacyConfig)) {
-    finalConfig = legacyConfig;
-  } else {
-    console.warn("⚠️ Firebase configuration missing! Please add VITE_FIREBASE_* secrets in AI Studio Settings.");
-    // Use a dummy config to prevent immediate crash, though features won't work
-    finalConfig = { ...envConfig, apiKey: 'MISSING', projectId: 'MISSING' };
-  }
-}
+// Use environment variables if they exist, otherwise fallback to the hardcoded config
+const finalConfig = {
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY || firebaseConfig.apiKey,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN || firebaseConfig.authDomain,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID || firebaseConfig.projectId,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET || firebaseConfig.storageBucket,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID || firebaseConfig.messagingSenderId,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID || firebaseConfig.appId,
+  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID || firebaseConfig.measurementId,
+  firestoreDatabaseId: import.meta.env.VITE_FIREBASE_FIRESTORE_DB_ID || firebaseConfig.firestoreDatabaseId,
+};
 
 const app = initializeApp(finalConfig);
 export const db = getFirestore(app, finalConfig.firestoreDatabaseId);

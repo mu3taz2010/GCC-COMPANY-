@@ -25,7 +25,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     return unsubscribe;
   }, []);
 
-  const isAdmin = !!user && !!user.email && adminEmails.includes(user.email);
+  const isAdmin = !!user && !!user.email && adminEmails.map(e => e.toLowerCase()).includes(user.email.toLowerCase());
 
   return (
     <AuthContext.Provider value={{ user, isAdmin, loading }}>

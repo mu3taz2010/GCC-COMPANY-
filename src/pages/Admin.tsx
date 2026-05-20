@@ -215,14 +215,30 @@ export default function Admin() {
   if (!isAdmin) return (
     <div className="pt-40 text-center px-4">
       <h1 className="text-4xl font-display font-black text-slate-900 mb-8 uppercase">Admin Access Required</h1>
-      <p className="text-slate-500 mb-8">This area is reserved for authorized personnel. Please login with a verified administrator account.</p>
-      <button 
-        onClick={loginWithGoogle}
-        className="bg-slate-950 text-white px-10 py-4 rounded-none font-black uppercase text-sm flex items-center mx-auto hover:bg-red-600 transition-colors"
-      >
-        <LogIn className="mr-3 rtl:ml-3" size={20} />
-        Login with Administrative Account
-      </button>
+      {user ? (
+        <div className="mb-8">
+          <p className="text-slate-500 mb-2">You are logged in as:</p>
+          <p className="text-red-600 font-bold font-mono text-lg">{user.email}</p>
+          <p className="text-slate-500 mt-4">This account does not have administrative privileges. Please logout and login with an authorized account.</p>
+          <button 
+            onClick={logout}
+            className="mt-8 border-2 border-slate-900 text-slate-900 px-6 py-3 rounded-none font-bold uppercase text-xs tracking-widest hover:bg-slate-900 hover:text-white transition-all"
+          >
+            Logout and Try again
+          </button>
+        </div>
+      ) : (
+        <>
+          <p className="text-slate-500 mb-8">This area is reserved for authorized personnel. Please login with a verified administrator account.</p>
+          <button 
+            onClick={loginWithGoogle}
+            className="bg-slate-950 text-white px-10 py-4 rounded-none font-black uppercase text-sm flex items-center mx-auto hover:bg-red-600 transition-colors"
+          >
+            <LogIn className="mr-3 rtl:ml-3" size={20} />
+            Login with Administrative Account
+          </button>
+        </>
+      )}
     </div>
   );
 

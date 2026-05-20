@@ -10,7 +10,7 @@ import Projects from './pages/Projects';
 import Contact from './pages/Contact';
 import Admin from './pages/Admin';
 import QuoteRequest from './pages/QuoteRequest';
-import { AuthProvider } from './context/AuthContext';
+import { AuthProvider, useAuth } from './context/AuthContext';
 import { AnimatePresence, motion } from 'motion/react';
 
 const PageWrapper = ({ children }: { children: React.ReactNode }) => {
@@ -30,7 +30,7 @@ const PageWrapper = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-export default function App() {
+const AppContent = () => {
   const { i18n } = useTranslation();
   
   React.useEffect(() => {
@@ -39,26 +39,32 @@ export default function App() {
   }, [i18n.language]);
 
   return (
+    <div className="min-h-screen bg-white font-sans selection:bg-red-100 selection:text-red-900">
+      <Navbar />
+      <main>
+        <PageWrapper>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/services" element={<Services />} />
+            <Route path="/projects" element={<Projects />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/admin" element={<Admin />} />
+            <Route path="/request-quote" element={<QuoteRequest />} />
+          </Routes>
+        </PageWrapper>
+      </main>
+      <Footer />
+      <WhatsAppButton />
+    </div>
+  );
+}
+
+export default function App() {
+  return (
     <AuthProvider>
       <Router>
-        <div className="min-h-screen bg-white font-sans selection:bg-red-100 selection:text-red-900">
-          <Navbar />
-          <main>
-            <PageWrapper>
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/services" element={<Services />} />
-                <Route path="/projects" element={<Projects />} />
-                <Route path="/contact" element={<Contact />} />
-                <Route path="/admin" element={<Admin />} />
-                <Route path="/request-quote" element={<QuoteRequest />} />
-              </Routes>
-            </PageWrapper>
-          </main>
-          <Footer />
-          <WhatsAppButton />
-        </div>
+        <AppContent />
       </Router>
     </AuthProvider>
   );

@@ -6,12 +6,6 @@ import { db } from '../firebase';
 import { doc, getDoc } from 'firebase/firestore';
 import { cn } from '../lib/utils';
 
-import firefightingImg from '../assets/images/firefighting_systems_thumbnail_1779179053671.png';
-import hvacImg from '../assets/images/hvac_cooling_thumbnail_1779179069525.png';
-import generatorsImg from '../assets/images/generators_power_thumbnail_1779179086020.png';
-import alarmsImg from '../assets/images/smart_alarms_thumbnail_1779179101533.png';
-import cctvImg from '../assets/images/cctv_security_thumbnail_1779181586579.png';
-
 export default function Services() {
   const { t } = useTranslation();
   const [catalogUrl, setCatalogUrl] = React.useState('');
@@ -33,7 +27,7 @@ export default function Services() {
       id: "firefighting",
       title: t('firefighting'),
       icon: Shield,
-      image: firefightingImg,
+      image: "/images/firefighting_systems_thumbnail_1779179053671.png",
       features: [
         t('fire_f1', { defaultValue: "Hydrant and sprinkler systems design" }),
         t('fire_f2', { defaultValue: "Installation of FM200 and CO2 gas systems" }),
@@ -45,7 +39,7 @@ export default function Services() {
       id: "hvac",
       title: t('hvac'),
       icon: Wind,
-      image: hvacImg,
+      image: "/images/hvac_cooling_thumbnail_1779179069525.png",
       features: [
         t('hvac_f1', { defaultValue: "Central Air Conditioning & Chillers" }),
         t('hvac_f2', { defaultValue: "Duct design and manufacturing" }),
@@ -57,7 +51,7 @@ export default function Services() {
       id: "generators",
       title: t('generators'),
       icon: Zap,
-      image: generatorsImg,
+      image: "/images/generators_power_thumbnail_1779179086020.png",
       features: [
         t('gen_f1', { defaultValue: "Supplying heavy-duty diesel generators" }),
         t('gen_f2', { defaultValue: "Automatic Transfer Switches (ATS)" }),
@@ -69,7 +63,7 @@ export default function Services() {
       id: "alarms",
       title: t('alarms'),
       icon: Bell,
-      image: alarmsImg,
+      image: "/images/smart_alarms_thumbnail_1779179101533.png",
       features: [
         t('alarm_f1', { defaultValue: "Addressable fire alarm systems" }),
         t('alarm_f2', { defaultValue: "Integration with suppression systems" }),
@@ -81,7 +75,7 @@ export default function Services() {
       id: "cctv",
       title: t('cctv'),
       icon: Video,
-      image: cctvImg,
+      image: "/images/cctv_security_thumbnail_1779181586579.png",
       features: [
         t('cctv_f1', { defaultValue: "IP Camera networks and NVR storage" }),
         t('cctv_f2', { defaultValue: "AI-powered motion detection & analytics" }),
